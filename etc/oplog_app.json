@@ -1,0 +1,74 @@
+{  
+   "source" : [{ 
+                 "type" : "test",
+                 "db" : "local",
+                 "namespaces" : [{ "name": "testDB1",
+                                   "filter" : "mycollection" },
+                                 { "name": "testDB2",
+                                   "filter" : "mycollection" }],
+
+                 "url" : { "form" : "mongodb://%s:%s/%s",
+                           "ips" : [ "127.0.1.1" ],
+                           "port" : "27017"
+                         }
+               },
+               { 
+                 "type" : "production",
+                 "db" : "local",
+                 "namespaces" : [{ "name": "testDB1",
+                                   "filter" : "mycollection" },
+                                 { "name": "testDB2",
+                                   "filter" : "mycollection" }],
+
+                 "url" : { "form" : "mongodb://%s@%s/%s?ssl=true\u0026authMechanism=%s\u0026authSource=$external\u0026replicaSet=%s",
+                           "ips" : [ "10.144.107.26",
+                                     "10.144.107.29",
+                                     "10.144.107.119" ],
+                           "port" : "27017",
+                           "rs_name" : "cloudeng-mongodb-rs",
+                           "auth_name" : "CN=10.144.107.26,OU=mongodb,O=IBM,L=RTP,ST=NC,C=US",
+                           "auth_type" : "MONGODB-X509",
+                           "ssl" : {
+                                     "sslCA" : "/home/egriffin/mesos-infrastructure/work/cloudeng/APIConnectCACert.pem",
+                                     "sslCert" : "/home/egriffin/mesos-infrastructure/work/cloudeng/mongodb-10.144.107.26.pem",
+                                     "sslKey" : "/home/egriffin/mesos-infrastructure/work/cloudeng/mongodb-10.144.107.26.pem"
+                                   }
+                         }
+              }],
+   "target" : [{ 
+                 "type" : "test",
+                 "db" : "local",
+                 "namespaces" : [{ "name": "testDB1",
+                                   "filter" : "mycollection" },
+                                 { "name": "testDB2",
+                                   "filter" : "mycollection" }],
+
+                 "url" : { "form" : "mongodb://%s:%s/%s",
+                           "ips" : [ "127.0.1.1" ],
+                           "port" : "27017"
+                         }
+               },
+               { 
+                 "type" : "production",
+                 "db" : "local",
+                 "namespaces" : [{ "name": "testDB3",
+                                   "filter" : "mycollection" },
+                                 { "name": "testDB4",
+                                   "filter" : "mycollection" }],
+
+                 "url" : { "form" : "mongodb://%s@%s/%s?ssl=true\u0026authMechanism=%s\u0026authSource=$external\u0026replicaSet=%s",
+                           "ips" : [ "10.144.107.26",
+                                     "10.144.107.29",
+                                     "10.144.107.119" ],
+                           "port" : "27017",
+                           "rs_name" : "cloudeng-mongodb-rs",
+                           "auth_name" : "CN=10.144.107.26,OU=mongodb,O=IBM,L=RTP,ST=NC,C=US",
+                           "auth_type" : "MONGODB-X509",
+                           "ssl" : {
+                                     "sslCA" : "/home/egriffin/mesos-infrastructure/work/cloudeng/APIConnectCACert.pem",
+                                     "sslCert" : "/home/egriffin/mesos-infrastructure/work/cloudeng/mongodb-10.144.107.26.pem",
+                                     "sslKey" : "/home/egriffin/mesos-infrastructure/work/cloudeng/mongodb-10.144.107.26.pem"
+                                   }
+                         }
+               }]
+}

@@ -1,0 +1,35 @@
+#!/bin/bash
+##/bin/dumb-init /bin/bash
+#
+# Note above that we run dumb-init as PID 1 in order to reap zombie processes
+# as well as forward signals to all processes in its session. Normally, sh
+# wouldn't do either of these functions so we'd leak zombies as well as do
+# unclean termination of all our sub-processes.
+#
+# The main script for traefik docker container
+#
+# Note:
+#       /config will contain any configuration file if needed
+#
+set -x
+
+# Variables
+HOSTNAME=`hostname`
+HOSTADDR=${APIC_MESOS_IP:-$(hostname -i)}
+
+COMMAND="DEBUG=* node index.js /etc/oplog_app.json testRemoteOne testRemoteTwo"
+
+echo "Logging to oplog_app.log started..."
+echo "-----------------------------------"
+date
+echo "-----------------------------------"
+env | sort
+echo "-----------------------------------"
+echo " "
+ifconfig
+echo "-----------------------------------"
+echo " "
+
+echo "...Starting oplog_app"
+echo " "
+cd /opt/oplog_app/src && pwd && exec sudo -Eu oploguser -g oploguser $COMMAND
