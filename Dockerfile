@@ -1,6 +1,9 @@
 # -------------------------#
 # Ubuntu 14.04 Setup       #
 # -------------------------#
+#
+# UNDER CONSTRUCTION
+#
 FROM ubuntu:16.04
 #FROM alpine:3.6   --  alpine does NOT support fsevents node mod !!!
 
@@ -50,7 +53,7 @@ ADD package.json /opt/oplog_app/
 ADD etc/* /etc/
 
 # Add mongo_oplogp to /opt
-ADD mongo_oplog/* /opt/mongo_oplog/
+ADD ../mongo_oplog/* /opt/mongo_oplog/
 
 # Run the npm installer
 RUN ls -al /opt/mongo_oplog/* && \

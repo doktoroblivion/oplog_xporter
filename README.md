@@ -1,8 +1,14 @@
 # Introduction
+UNDER CONSTRUCTION
 
 # Build
-A Dockerfile is provided to create a usable docker container.  This supports both internal and external configurations through the use of envvars.
+A Makefile is provided to create a usable docker container.  This supports both internal and external configurations through the use of envvars.
 
+## Preparation
+As a pre-requisite you must install the following as peer projects, at same directory level as this one:
+- https://github.com/cayasso/mongo-oplog : mongo-oplog-2.1.0
+
+After doing so, update the appropriate variables in the Makefile prior to making any targets.
 
 # Deployment
 
@@ -11,6 +17,11 @@ The nodejs application can be deployed as any other nodejs application.  It supp
 - json_file: argument providing full path to the json file containing the acceptable source and target environment configurations.
 - source: argument key for the source environment to use.
 - target: argument key for the target environment to use.
+
+For example, once the project is built and placed on the machine where it will be used, which has access to both source and target environments, and you have updated the json for both environments, issue something like the following:
+```
+DEBUG=* node index.js etc/oplog_app.json testRemoteOne testRemoteTwo
+```
 
 ## Docker
 

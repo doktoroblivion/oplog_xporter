@@ -1,19 +1,31 @@
 {  
+   "status" : "stopped",
+   "server" : { "type" : "https",
+                "port" : "8180",
+                "ssl" : {
+                          "sslCert" : "test/certs/mydomain.crt",
+                          "sslKey" : "test/certs/private.key"
+                        },
+                "jwt" : { "value" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJBY21lIiwiaWF0IjoxNTEzODcyNzE2LCJleHAiOjE2NDAxMDMxMjIsImF1ZCI6Ind3dy5hY21lLm9yZyIsInN1YiI6InRlc3QifQ.rSD_ejhBrdbhCPmDArKSkYy255_zBOqSKyOd6xbGpgY0qoJd9pAqBti32s0M8-cK2zN_G9M-a1PZ9i-BxSJFmw",
+                          "secret" : "MIIEwAIBADANBgkqhkiG9w0BAQEFAASCBKowggSmAgEAAoIBAQDTo2spql6MOo59"
+                        }
+              },
    "source" : [{ 
-                 "type" : "test",
+                 "type" : "localhost",
                  "db" : "local",
                  "namespaces" : [{ "name": "testDB1",
                                    "filter" : "mycollection" },
                                  { "name": "testDB2",
                                    "filter" : "mycollection" }],
 
-                 "url" : { "form" : "mongodb://%s:%s/%s",
+                 "url" : { "form" : "mongodb://%s:%s/%s?replicaSet=%s",
                            "ips" : [ "127.0.1.1" ],
-                           "port" : "27017"
+                           "port" : "27017",
+                           "rs_name" : "rs0"
                          }
                },
                { 
-                 "type" : "production",
+                 "type" : "remote",
                  "db" : "local",
                  "namespaces" : [{ "name": "testDB1",
                                    "filter" : "mycollection" },
@@ -25,31 +37,32 @@
                                      "10.144.107.29",
                                      "10.144.107.119" ],
                            "port" : "27017",
-                           "rs_name" : "cloudeng-mongodb-rs",
-                           "auth_name" : "CN=10.144.107.26,OU=mongodb,O=IBM,L=RTP,ST=NC,C=US",
+                           "rs_name" : "acme-mongodb-rs",
+                           "auth_name" : "CN=mongoAdmin,OU=mongodb-client,O=ACME,L=RTP,ST=NC,C=US",
                            "auth_type" : "MONGODB-X509",
                            "ssl" : {
-                                     "sslCA" : "/home/egriffin/mesos-infrastructure/work/cloudeng/APIConnectCACert.pem",
-                                     "sslCert" : "/home/egriffin/mesos-infrastructure/work/cloudeng/mongodb-10.144.107.26.pem",
-                                     "sslKey" : "/home/egriffin/mesos-infrastructure/work/cloudeng/mongodb-10.144.107.26.pem"
+                                     "sslCA" : "/home/egriffin/oplog_xporter/certs/CACert.pem",
+                                     "sslCert" : "/home/egriffin/oplog_xporter/certs/acme-mongodb-client.pem",
+                                     "sslKey" : "/home/egriffin/oplog_xporter/certs/acme-mongodb-client.pem"
                                    }
                          }
               }],
    "target" : [{ 
-                 "type" : "test",
+                 "type" : "localhost",
                  "db" : "local",
                  "namespaces" : [{ "name": "testDB1",
                                    "filter" : "mycollection" },
                                  { "name": "testDB2",
                                    "filter" : "mycollection" }],
 
-                 "url" : { "form" : "mongodb://%s:%s/%s",
+                 "url" : { "form" : "mongodb://%s:%s/%s?replicaSet=%s",
                            "ips" : [ "127.0.1.1" ],
-                           "port" : "27017"
+                           "port" : "27017",
+                           "rs_name" : "rs0"
                          }
                },
                { 
-                 "type" : "production",
+                 "type" : "remote",
                  "db" : "local",
                  "namespaces" : [{ "name": "testDB3",
                                    "filter" : "mycollection" },
@@ -61,13 +74,13 @@
                                      "10.144.107.29",
                                      "10.144.107.119" ],
                            "port" : "27017",
-                           "rs_name" : "cloudeng-mongodb-rs",
-                           "auth_name" : "CN=10.144.107.26,OU=mongodb,O=IBM,L=RTP,ST=NC,C=US",
+                           "rs_name" : "acme-mongodb-rs",
+                           "auth_name" : "CN=mongoAdmin,OU=mongodb-client,O=ACME,L=RTP,ST=NC,C=US",
                            "auth_type" : "MONGODB-X509",
                            "ssl" : {
-                                     "sslCA" : "/home/egriffin/mesos-infrastructure/work/cloudeng/APIConnectCACert.pem",
-                                     "sslCert" : "/home/egriffin/mesos-infrastructure/work/cloudeng/mongodb-10.144.107.26.pem",
-                                     "sslKey" : "/home/egriffin/mesos-infrastructure/work/cloudeng/mongodb-10.144.107.26.pem"
+                                     "sslCA" : "/home/egriffin/oplog_xporter/certs/CACert.pem",
+                                     "sslCert" : "/home/egriffin/oplog_xporter/certs/acme-mongodb-client.pem",
+                                     "sslKey" : "/home/egriffin/oplog_xporter/certs/acme-mongodb-client.pem"
                                    }
                          }
                }]
