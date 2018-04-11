@@ -1,14 +1,20 @@
 # Introduction
-UNDER CONSTRUCTION
+A front-end for the mongo-oplog that is already provided on GIT, see below for details.  This javascript enables you to specify a source and target environment for specific namespaces and documents you wish to keep synchronized between two environments.  It is most helpful when moving your data from an older set of VSIs or installation into another, perhaps provided by a service provider, after you have initially primed the new (target) installation using mongodump/restore.  
 
-# Build
-A Makefile is provided to create a usable docker container.  This supports both internal and external configurations through the use of envvars.
+# License and Disclaimer
+(The MIT License)
 
-## Preparation
+Copyright (c) 2017
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+# Preparation and Pre-requisites
 As a pre-requisite you must install the following as peer projects, at same directory level as this one:
 - https://github.com/cayasso/mongo-oplog : mongo-oplog-2.1.0
-
-After doing so, update the appropriate variables in the Makefile prior to making any targets.
 
 # Deployment
 
@@ -20,29 +26,14 @@ The nodejs application can be deployed as any other nodejs application.  It supp
 
 For example, once the project is built and placed on the machine where it will be used, which has access to both source and target environments, and you have updated the json for both environments, issue something like the following:
 ```
-DEBUG=* node index.js etc/oplog_app.json testRemoteOne testRemoteTwo
+DEBUG=* node index.js etc/oplog_app.json remote localhost
 ```
 
-## Docker
-
-### Using Environment Variables
-In order to deploy using scripts you must use some environment variables. The following environment variables are used by the scripts to perform deploy- and undeployments.
-<p>
-<ol>
-<li>[optional] Common docker container related options, DOCKER_COMMON_OPTS, see Docker documentation for details.  An example is provided below, but the specific below options are not recommended.
-<ul>
-<li>export DOCKER_COMMON_OPTS="-a stdin -a stdout"
-</ul>
-<p>
-<li>[optional] Set the oplog json file to use, OPLOG_ARGS.
-<ul>
-<li>export OPLOG_ARGS="/shared/oplog"
-</ul>
-<p>
-</ol>
+### JSON file
+In the etc directory is there is a JSON file that you will have to configure for your particular setup.  It currently provides for no-authentication, basic authentication and TLS certification type connections for source and target.  You will have to provide access to any certificates that the tool will need via the JSON file, as shown in the provided example.  The main certs that are given are provided for the HTTPS CLI REST interface to provide some control while the oplog mechanism is running.
 
 # Control
-The oplog-app contains a web server for REST calls which can be configured for either HTTP or HTTPS. It provides the following capabilities, as shown per the help message.
+The app contains a web server for REST calls which can be configured for either HTTP or HTTPS. It provides the following capabilities, as shown per the help message.
 
 ## Help
 An example help REST call with HTTPS and JWT would look like the following.
