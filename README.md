@@ -1,7 +1,7 @@
 # Introduction
 A front-end for the mongo-oplog that is already provided on GIT, see below for details.  This javascript enables you to specify a source and target environment for specific namespaces and documents you wish to keep synchronized between two environments.  It is most helpful when moving your data from an older set of VSIs or installation into another, perhaps provided by a service provider, after you have initially primed the new (target) installation using mongodump/restore.  
 
-![](images/oplog_xporter_overview.jpg)
+![](docs/images/oplog_xporter_overview.jpg)
 
 # License and Disclaimer
 (The MIT License)
@@ -17,6 +17,10 @@ THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 # Preparation and Pre-requisites
 As a pre-requisite you must install the following as peer projects, at same directory level as this one:
 - https://github.com/cayasso/mongo-oplog : mongo-oplog-2.1.0
+
+## Quick Guides and Overviews
+The following are provided as quick video guides.
+- ![](docs/videos/oplog_xporter_overview.mp4)
 
 # Deployment
 
@@ -52,5 +56,5 @@ There are several tests that are used to verify the application is sound.  A set
 Basic tests can be run using the following command and a sample output is shown.
 
 
-![](images/oplog_app_basictestouput.jpg)
+![](docs/images/oplog_app_basictestouput.jpg)
 
