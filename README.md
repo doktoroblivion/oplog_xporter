@@ -19,7 +19,7 @@ As a pre-requisite you must install the following as peer projects, at same dire
 - https://github.com/cayasso/mongo-oplog : mongo-oplog-2.1.0
 
 ## Quick Guides and Overviews
-The following are provided as quick video guides.
+A quick overview of the function is provied here:
 - [![oplog_xporter_overview](http://img.youtube.com/vi/5ekUGpBRhGw/0.jpg)](https://www.youtube.com/watch?v=5ekUGpBRhGw&feature=youtu.be)
 
 # Deployment
