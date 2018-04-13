@@ -41,9 +41,9 @@
                            "auth_name" : "CN=mongoAdmin,OU=mongodb-client,O=ACME,L=RTP,ST=NC,C=US",
                            "auth_type" : "MONGODB-X509",
                            "ssl" : {
-                                     "sslCA" : "/home/egriffin/oplog_xporter/certs/CACert.pem",
-                                     "sslCert" : "/home/egriffin/oplog_xporter/certs/acme-mongodb-client.pem",
-                                     "sslKey" : "/home/egriffin/oplog_xporter/certs/acme-mongodb-client.pem"
+                                     "sslCA" : "../oplog_xporter/certs/CACert.pem",
+                                     "sslCert" : "../oplog_xporter/certs/acme-mongodb-client.pem",
+                                     "sslKey" : "../oplog_xporter/certs/acme-mongodb-client.pem"
                                    }
                          }
               }],
@@ -78,9 +78,9 @@
                            "auth_name" : "CN=mongoAdmin,OU=mongodb-client,O=ACME,L=RTP,ST=NC,C=US",
                            "auth_type" : "MONGODB-X509",
                            "ssl" : {
-                                     "sslCA" : "/home/egriffin/oplog_xporter/certs/CACert.pem",
-                                     "sslCert" : "/home/egriffin/oplog_xporter/certs/acme-mongodb-client.pem",
-                                     "sslKey" : "/home/egriffin/oplog_xporter/certs/acme-mongodb-client.pem"
+                                     "sslCA" : "../oplog_xporter/certs/CACert.pem",
+                                     "sslCert" : "../oplog_xporter/certs/acme-mongodb-client.pem",
+                                     "sslKey" : "../oplog_xporter/certs/acme-mongodb-client.pem"
                                    }
                          }
                }]
