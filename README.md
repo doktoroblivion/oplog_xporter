@@ -20,7 +20,7 @@ As a pre-requisite you must install the following as peer projects, at same dire
 
 ## Quick Guides and Overviews
 The following are provided as quick video guides.
-- [![oplog_xporter_overview](http://img.youtube.com/vi/Q6fX5DT1PQY/0.jpg)](https://www.youtube.com/watch?v=Q6fX5DT1PQY&feature=youtu.be)
+- [![oplog_xporter_overview](http://img.youtube.com/vi/TYPX6iqhAc0/0.jpg)](https://www.youtube.com/watch?v=TYPX6iqhAc0&feature=youtu.be)
 
 # Deployment
 
