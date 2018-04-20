@@ -1,3 +1,21 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Introduction](#introduction)
+- [License and Disclaimer](#license-and-disclaimer)
+- [Preparation and Pre-requisites](#preparation-and-pre-requisites)
+  - [Quick Guides and Overviews](#quick-guides-and-overviews)
+- [Deployment](#deployment)
+  - [Native Linux](#native-linux)
+    - [JSON file](#json-file)
+- [Control](#control)
+  - [Help](#help)
+- [Testing](#testing)
+  - [Running Basic Tests](#running-basic-tests)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Introduction
 A front-end for the mongo-oplog that is already provided on GIT, see below for details.  This javascript enables you to specify a source and target environment for specific namespaces and documents you wish to keep synchronized between two environments.  It is most helpful when moving your data from an older set of VSIs or installation into another, perhaps provided by a service provider, after you have initially primed the new (target) installation using mongodump/restore.  
 
@@ -18,10 +36,12 @@ THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 As a pre-requisite you must install the following as peer projects, at same directory level as this one:
 - https://github.com/cayasso/mongo-oplog : mongo-oplog-2.1.0
 
-## Quick Guides and Overviews
-A quick overview of the function is provied here:
-- [![oplog_xporter_overview](http://img.youtube.com/vi/5ekUGpBRhGw/0.jpg)](https://www.youtube.com/watch?v=5ekUGpBRhGw&feature=youtu.be)
-- [![oplog_xporter_demo](http://img.youtube.com/vi/25DU-_grYGw/0.jpg)](https://www.youtube.com/watch?v=25DU-_grYGw&feature=youtu.be)
+## Online Videos
+
+### Overview of Functionality
+[![oplog_xporter_overview](http://img.youtube.com/vi/5ekUGpBRhGw/0.jpg)](https://www.youtube.com/watch?v=5ekUGpBRhGw&feature=youtu.be)
+### Demonstration of Application
+[![oplog_xporter_demo](http://img.youtube.com/vi/25DU-_grYGw/0.jpg)](https://www.youtube.com/watch?v=25DU-_grYGw&feature=youtu.be)
 
 # Deployment
 
