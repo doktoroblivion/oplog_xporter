@@ -61,7 +61,15 @@ function startOplog(user_vars, source_idx, ns_idx, source_type, target_type, cb)
                     }
 
                     connectTarget(user_vars, ns_idx, target_type, function(t_db) {
-                        retObj[MONGO] = t_db;
+                        if ( typeof  t_db == 'string' ) {
+                            debStOpLog("ERROR: an error occurred calling connectTarget function - %s", t_db);
+                            cb(4, source_idx, ns_idx, retObj);
+                        } else if ( typeof  t_db == 'object' ) {
+                            retObj[MONGO] = t_db;
+                        } else {
+                            console.log("ERROR: Configuration issue detected with target configuration");
+                            process.exit(10);
+                        }
 
                         if ( typeof user_vars.source[source_idx].url.ssl == 'undefined' ) {
                             opts.ns = user_vars.source[source_idx].namespaces[ns_idx].name + 
@@ -70,7 +78,7 @@ function startOplog(user_vars, source_idx, ns_idx, source_type, target_type, cb)
                             source_conn = format(user_vars.source[source_idx].url.form, 
                                                  user_vars.source[source_idx].url.ips[0], 
                                                  user_vars.source[source_idx].url.port,
-                                                 user_vars.target[source_idx].db,
+                                                 user_vars.source[source_idx].db,
                                                  user_vars.source[source_idx].url.rs_name);
                     
                         } else if (typeof user_vars.source[source_idx].url.ssl !== 'undefined' &&
@@ -149,9 +157,11 @@ function startOplog(user_vars, source_idx, ns_idx, source_type, target_type, cb)
                                     const _col = retObj[MONGO].collection(_ns[1]);
                                     _col.update(data.o2, data.o, function (err) {
                                         if (err) {
-                                            debStOpLog("%s] Update ERROR: %s", ns_idx, err);
+                                            debStOpLog( "%s] Update ERROR: %s", ns_idx, err);
                                         } else {
-                                            console.log("{ op: \"Update\", db: \"%s\", json: \"%s\" }", data.ns, util.inspect(data.o, {showHidden: false, depth: null}));
+                                            console.log( "{ op: \"Update\", db: \"%s\", json: \"%s\" }", 
+                                                         data.ns, 
+                                                         util.inspect(data.o, {showHidden: false, depth: null}));
                                         }
                                     });
                                 } else {
@@ -162,7 +172,9 @@ function startOplog(user_vars, source_idx, ns_idx, source_type, target_type, cb)
                         
                             retObj[SERVER].on('insert', async(data) => {
                                 debStOpLog( "%s] ------- Insert -------", ns_idx);
-                                debStOpLogDet( "%s] Insert object: %s", ns_idx, util.inspect(data, {showHidden: false, depth: null}) );
+                                debStOpLogDet( "%s] Insert object: %s", 
+                                               ns_idx, 
+                                               util.inspect(data, {showHidden: false, depth: null}) );
                                 if ( typeof retObj[MONGO] !== 'undefined' ) {
                                     const _ns = data.ns.split(".");
                                     const _col = retObj[MONGO].collection(_ns[1]);
@@ -170,7 +182,9 @@ function startOplog(user_vars, source_idx, ns_idx, source_type, target_type, cb)
                                         if (err) {
                                             debStOpLog( "%s] Insert ERROR: ", ns_idx, err);
                                         } else {
-                                            console.log("{ op: \"Insert\", db: \"%s\", json: \"%s\" }", data.ns, util.inspect(data.o, {showHidden: false, depth: null}));
+                                            console.log( "{ op: \"Insert\", db: \"%s\", json: \"%s\" }", 
+                                                         data.ns, 
+                                                         util.inspect(data.o, {showHidden: false, depth: null}));
                                         }
                                     });
                                 } else {
@@ -181,7 +195,9 @@ function startOplog(user_vars, source_idx, ns_idx, source_type, target_type, cb)
                         
                             retObj[SERVER].on('delete', async(data) => {
                                 debStOpLog( "%s] ------- Delete -------", ns_idx);
-                                debStOpLogDet( "%s] Delete object: %s", ns_idx, util.inspect(data, {showHidden: false, depth: null}) );
+                                debStOpLogDet( "%s] Delete object: %s", 
+                                               ns_idx, 
+                                               util.inspect(data, {showHidden: false, depth: null}) );
                                 if ( typeof retObj[MONGO] !== 'undefined' ) {
                                     const _ns = data.ns.split(".");
                                     const _col = retObj[MONGO].collection(_ns[1]);
@@ -242,7 +258,7 @@ function startOplog(user_vars, source_idx, ns_idx, source_type, target_type, cb)
                 cb(8, source_idx, ns_idx, retObj);
             }
         } else {
-            debStOpLog("Target Mongo DB is already CONNECTED for index: " + ns_idx + ", retObj[mongo]: " + retObj[MONGO]);
+            debStOpLog("Target Mongo DB is already CONNECTED for index: " + ns_idx + ", retObj[MONGO]: " + retObj[MONGO]);
         }
 
     } else {
@@ -660,12 +676,12 @@ function setupSystemEvents(user_vars, r_server) {
     });
             
     process.on( "SIGINT", function() {
-        debStEvents("Caught an interrupt signal, shutting down the HTTP/S server");
+        console.log("\nCaught an interrupt signal, shutting down the HTTP/S server");
         stopHttp(user_vars, r_server);
     });
             
     process.on( "SIGTERM", function() {
-        debStEvents("Caught an interrupt signal, shutting down the HTTP/S server");
+        console.log("\nCaught an interrupt signal, shutting down the HTTP/S server");
         stopHttp(user_vars, r_server);
     });
     debStEvents("Exiting setupEvents");

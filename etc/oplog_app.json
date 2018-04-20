@@ -11,26 +11,10 @@
                         }
               },
    "source" : [{ 
-                 "type" : "localhost",
-                 "db" : "local",
-                 "namespaces" : [{ "name": "testDB1",
-                                   "filter" : "mycollection" },
-                                 { "name": "testDB2",
-                                   "filter" : "mycollection" }],
-
-                 "url" : { "form" : "mongodb://%s:%s/%s?replicaSet=%s",
-                           "ips" : [ "127.0.1.1" ],
-                           "port" : "27017",
-                           "rs_name" : "rs0"
-                         }
-               },
-               { 
                  "type" : "remote",
                  "db" : "local",
-                 "namespaces" : [{ "name": "testDB1",
-                                   "filter" : "mycollection" },
-                                 { "name": "testDB2",
-                                   "filter" : "mycollection" }],
+                 "namespaces" : [{ "name": "testOPLOG",
+                                   "filter" : "demo" }],
 
                  "url" : { "form" : "mongodb://%s@%s/%s?ssl=true\u0026authMechanism=%s\u0026authSource=$external\u0026replicaSet=%s",
                            "ips" : [ "10.144.107.26",
@@ -50,38 +34,13 @@
    "target" : [{ 
                  "type" : "localhost",
                  "db" : "local",
-                 "namespaces" : [{ "name": "testDB1",
-                                   "filter" : "mycollection" },
-                                 { "name": "testDB2",
-                                   "filter" : "mycollection" }],
+                 "namespaces" : [{ "name": "testOPLOG",
+                                   "filter" : "demo" }],
 
                  "url" : { "form" : "mongodb://%s:%s/%s?replicaSet=%s",
                            "ips" : [ "127.0.1.1" ],
                            "port" : "27017",
                            "rs_name" : "rs0"
-                         }
-               },
-               { 
-                 "type" : "remote",
-                 "db" : "local",
-                 "namespaces" : [{ "name": "testDB3",
-                                   "filter" : "mycollection" },
-                                 { "name": "testDB4",
-                                   "filter" : "mycollection" }],
-
-                 "url" : { "form" : "mongodb://%s@%s/%s?ssl=true\u0026authMechanism=%s\u0026authSource=$external\u0026replicaSet=%s",
-                           "ips" : [ "10.144.107.26",
-                                     "10.144.107.29",
-                                     "10.144.107.119" ],
-                           "port" : "27017",
-                           "rs_name" : "acme-mongodb-rs",
-                           "auth_name" : "CN=mongoAdmin,OU=mongodb-client,O=ACME,L=RTP,ST=NC,C=US",
-                           "auth_type" : "MONGODB-X509",
-                           "ssl" : {
-                                     "sslCA" : "../oplog_xporter/certs/CACert.pem",
-                                     "sslCert" : "../oplog_xporter/certs/acme-mongodb-client.pem",
-                                     "sslKey" : "../oplog_xporter/certs/acme-mongodb-client.pem"
-                                   }
                          }
                }]
 }

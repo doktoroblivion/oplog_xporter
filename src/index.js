@@ -1,4 +1,4 @@
-'use strict'
+//'use strict'
 
 var app = require('./oplog_app.js');
 var util = require('util');
